@@ -1,13 +1,6 @@
-//
-//  OperationsViewModel.swift
-//  S058_BudgetTracker
-//
-//  Created by Olivier Marteaux on 10/09/2026.
-//
-
 import Foundation
-import SwiftData
 import Combine
+import SwiftData
 
 @MainActor
 final class OperationsViewModel: ObservableObject {
@@ -18,17 +11,17 @@ final class OperationsViewModel: ObservableObject {
         self.modelContext = modelContext
     }
 
-    // MARK: - CRUD
-
     func addOperation(
         date: Date,
         description: String,
-        amountInCents: Int
+        amountInCents: Int,
+        category: String
     ) {
         let operation = Operation(
             date: date,
             operationDescription: description,
-            amountInCents: amountInCents
+            amountInCents: amountInCents,
+            category: category
         )
 
         modelContext.insert(operation)
@@ -39,27 +32,31 @@ final class OperationsViewModel: ObservableObject {
         _ operation: Operation,
         date: Date,
         description: String,
-        amountInCents: Int
+        amountInCents: Int,
+        category: String
     ) {
         operation.date = date
         operation.operationDescription = description
         operation.amountInCents = amountInCents
+        operation.category = category
 
         save()
     }
 
-    func deleteOperation(_ operation: Operation) {
+    func deleteOperation(
+        _ operation: Operation
+    ) {
         modelContext.delete(operation)
         save()
     }
-
-    // MARK: - Persistence
 
     private func save() {
         do {
             try modelContext.save()
         } catch {
-            print("Failed to save operation: \(error)")
+            print(
+                "Failed to save operation: \(error)"
+            )
         }
     }
 }

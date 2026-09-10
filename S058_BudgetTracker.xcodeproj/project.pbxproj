@@ -55,6 +55,7 @@
 		E8E28F943052F83700A476B8 /* Exceptions for "S058_BudgetTracker" folder in "BudgetTrackerWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Models/Category.swift,
 				Models/Operation.swift,
 			);
 			target = E8E28F743052F4A500A476B8 /* BudgetTrackerWidgetExtension */;

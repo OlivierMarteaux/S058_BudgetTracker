@@ -10,7 +10,8 @@ enum PersistenceController {
 
         do {
             let schema = Schema([
-                Operation.self
+                Operation.self,
+                Category.self
             ])
 
             guard let containerURL =
@@ -56,6 +57,7 @@ enum PersistenceController {
 
             let container = try ModelContainer(
                 for: Operation.self,
+                Category.self,
                 configurations: configuration
             )
 

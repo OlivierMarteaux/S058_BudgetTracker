@@ -40,6 +40,14 @@ struct OperationRowView: View {
                     .font(.body)
                     .fontWeight(.medium)
                     .lineLimit(1)
+
+                if !operation.category.isEmpty {
+
+                    Text(operation.category)
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
             }
 
             Spacer()

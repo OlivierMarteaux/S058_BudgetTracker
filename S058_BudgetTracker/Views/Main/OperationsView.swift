@@ -126,27 +126,27 @@ struct OperationsView: View {
                 AppTheme.background
             )
             .navigationTitle("Operations")
-            .toolbar {
-
-                ToolbarItem(
-                    placement: .topBarTrailing
-                ) {
-
-                    Button {
-
-                        showAddOperation = true
-
-                    } label: {
-
-                        Image(
-                            systemName: "plus"
-                        )
-                    }
-                    .accessibilityLabel(
-                        "Add operation"
-                    )
-                }
-            }
+//            .toolbar {
+//
+//                ToolbarItem(
+//                    placement: .topBarTrailing
+//                ) {
+//
+//                    Button {
+//
+//                        showAddOperation = true
+//
+//                    } label: {
+//
+//                        Image(
+//                            systemName: "plus"
+//                        )
+//                    }
+//                    .accessibilityLabel(
+//                        "Add operation"
+//                    )
+//                }
+//            }
             .overlay(
                 alignment: .bottomTrailing
             ) {
@@ -165,12 +165,14 @@ struct OperationsView: View {
 
                     date,
                     description,
-                    amountInCents in
+                    amountInCents,
+                    category in
 
                     viewModel.addOperation(
                         date: date,
                         description: description,
-                        amountInCents: amountInCents
+                        amountInCents: amountInCents,
+                        category: category
                     )
                 }
             }
@@ -184,13 +186,15 @@ struct OperationsView: View {
 
                     date,
                     description,
-                    amountInCents in
+                    amountInCents,
+                    category in
 
                     viewModel.updateOperation(
                         operation,
                         date: date,
                         description: description,
-                        amountInCents: amountInCents
+                        amountInCents: amountInCents,
+                        category: category
                     )
                 }
             }

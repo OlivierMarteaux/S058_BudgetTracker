@@ -1,26 +1,28 @@
-//
-//  OperationEditorView.swift
-//  S058_BudgetTracker
-//
-//  Created by Olivier Marteaux on 10/09/2026.
-//
-
 import SwiftUI
+import SwiftData
 
 struct OperationEditorView: View {
 
     @Environment(\.dismiss)
     private var dismiss
 
+    @Environment(\.modelContext)
+    private var modelContext
+
     @State private var date: Date
     @State private var description: String
     @State private var amount: String
+    @State private var category: String
+
+    @State private var showNewCategory = false
+    @State private var newCategoryName = ""
 
     let operation: Operation?
     let onSave: (
         Date,
         String,
-        Int
+        Int,
+        String
     ) -> Void
 
     init(
@@ -28,7 +30,8 @@ struct OperationEditorView: View {
         onSave: @escaping (
             Date,
             String,
-            Int
+            Int,
+            String
         ) -> Void
     ) {
 
@@ -54,10 +57,25 @@ struct OperationEditorView: View {
                     )
                 } ?? ""
         )
+
+        _category = State(
+            initialValue:
+                operation?.category ?? ""
+        )
     }
 
     private var isEditing: Bool {
         operation != nil
+    }
+
+    private var categoryStore: CategoryStore {
+        CategoryStore(
+            modelContext: modelContext
+        )
+    }
+
+    private var categories: [Category] {
+        categoryStore.categories()
     }
 
     private var amountInCents: Int? {
@@ -106,6 +124,41 @@ struct OperationEditorView: View {
                         "Description",
                         text: $description
                     )
+
+                    HStack {
+
+                        Picker(
+                            "Category",
+                            selection: $category
+                        ) {
+
+                            Text("None")
+                                .tag("")
+
+                            ForEach(categories) { categoryItem in
+
+                                Text(categoryItem.name)
+                                    .tag(categoryItem.name)
+                            }
+                        }
+
+                        Spacer()
+
+                        Button {
+
+                            newCategoryName = ""
+                            showNewCategory = true
+
+                        } label: {
+
+                            Image(
+                                systemName: "plus.circle.fill"
+                            )
+                            .font(.title3)
+                        }
+                        .buttonStyle(.borderless)
+                        .accessibilityLabel("Add category")
+                    }
 
                     TextField(
                         "Amount (€)",
@@ -158,13 +211,53 @@ struct OperationEditorView: View {
                         onSave(
                             date,
                             description,
-                            cents
+                            cents,
+                            category
                         )
 
                         dismiss()
                     }
                     .disabled(!canSave)
                 }
+            }
+            .alert(
+                "New category",
+                isPresented: $showNewCategory
+            ) {
+
+                TextField(
+                    "Category name",
+                    text: $newCategoryName
+                )
+
+                Button("Cancel", role: .cancel) {
+                    newCategoryName = ""
+                }
+
+                Button("Add") {
+
+                    let name = newCategoryName
+                        .trimmingCharacters(
+                            in: .whitespacesAndNewlines
+                        )
+
+                    guard !name.isEmpty else {
+                        return
+                    }
+
+                    categoryStore.addCategory(
+                        name: name
+                    )
+
+                    category = name
+                    newCategoryName = ""
+                }
+
+            } message: {
+
+                Text(
+                    "Enter the name of the new category."
+                )
             }
         }
     }

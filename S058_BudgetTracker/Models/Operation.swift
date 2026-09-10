@@ -1,10 +1,3 @@
-//
-//  Operation.swift
-//  S058_BudgetTracker
-//
-//  Created by Olivier Marteaux on 10/09/2026.
-//
-
 import Foundation
 import SwiftData
 
@@ -15,20 +8,21 @@ final class Operation {
     var date: Date
     var operationDescription: String
     var amountInCents: Int
+    var category: String
 
     init(
         id: UUID = UUID(),
         date: Date = Date(),
         operationDescription: String = "",
-        amountInCents: Int = 0
+        amountInCents: Int = 0,
+        category: String = ""
     ) {
         self.id = id
         self.date = date
         self.operationDescription = operationDescription
         self.amountInCents = amountInCents
+        self.category = category
     }
-
-    // MARK: - Amount
 
     var amount: Decimal {
         Decimal(amountInCents) / 100
@@ -38,8 +32,6 @@ final class Operation {
         amountInCents >= 0
     }
 
-    // MARK: - Display
-
     var formattedAmount: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
@@ -47,7 +39,7 @@ final class Operation {
         formatter.locale = Locale(identifier: "fr_FR")
 
         let value = NSDecimalNumber(decimal: amount)
-
-        return formatter.string(from: value) ?? "\(amountInCents) €"
+        return formatter.string(from: value)
+            ?? "\(amountInCents) €"
     }
 }
