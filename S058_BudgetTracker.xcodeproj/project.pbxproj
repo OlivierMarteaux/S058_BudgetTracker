@@ -10,6 +10,8 @@
 		E8E28F783052F4A500A476B8 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E28F773052F4A500A476B8 /* WidgetKit.framework */; };
 		E8E28F7A3052F4A500A476B8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E28F793052F4A500A476B8 /* SwiftUI.framework */; };
 		E8E28F8B3052F4A600A476B8 /* BudgetTrackerWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E8E28F753052F4A500A476B8 /* BudgetTrackerWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E8E28FA6305ED58800A476B8 /* CSVDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E28FA5305ED4D900A476B8 /* CSVDocument.swift */; };
+		E8E28FA7305ED5A000A476B8 /* OperationExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E28FA1305ED24F00A476B8 /* OperationExportService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,8 @@
 		E8E28F773052F4A500A476B8 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		E8E28F793052F4A500A476B8 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		E8E28F923052F6BD00A476B8 /* BudgetTrackerWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BudgetTrackerWidgetExtension.entitlements; sourceTree = "<group>"; };
+		E8E28FA1305ED24F00A476B8 /* OperationExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationExportService.swift; sourceTree = "<group>"; };
+		E8E28FA5305ED4D900A476B8 /* CSVDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVDocument.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -112,6 +116,7 @@
 		E8E28F2E3052EAC000A476B8 = {
 			isa = PBXGroup;
 			children = (
+				E8E28FA0305ED23800A476B8 /* Services */,
 				E8E28F923052F6BD00A476B8 /* BudgetTrackerWidgetExtension.entitlements */,
 				E8E28F393052EAC000A476B8 /* S058_BudgetTracker */,
 				E8E28F7B3052F4A500A476B8 /* BudgetTrackerWidget */,
@@ -136,6 +141,15 @@
 				E8E28F793052F4A500A476B8 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E8E28FA0305ED23800A476B8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E8E28FA5305ED4D900A476B8 /* CSVDocument.swift */,
+				E8E28FA1305ED24F00A476B8 /* OperationExportService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +261,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8E28FA6305ED58800A476B8 /* CSVDocument.swift in Sources */,
+				E8E28FA7305ED5A000A476B8 /* OperationExportService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

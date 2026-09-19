@@ -24,6 +24,7 @@ struct OperationsView: View {
     private var operations: [Operation]
 
     @State private var operationToEdit: Operation?
+    @State private var showExport = false
     
     init(
         showAddOperation: Binding<Bool> = .constant(false)
@@ -126,27 +127,42 @@ struct OperationsView: View {
                 AppTheme.background
             )
             .navigationTitle("Operations")
-//            .toolbar {
-//
-//                ToolbarItem(
-//                    placement: .topBarTrailing
-//                ) {
-//
-//                    Button {
-//
-//                        showAddOperation = true
-//
-//                    } label: {
-//
-//                        Image(
-//                            systemName: "plus"
-//                        )
-//                    }
-//                    .accessibilityLabel(
-//                        "Add operation"
-//                    )
-//                }
-//            }
+            .toolbar {
+
+                ToolbarItemGroup(
+                    placement: .topBarTrailing
+                ) {
+
+                    Button {
+
+                        showExport = true
+
+                    } label: {
+
+                        Image(
+                            systemName:
+                                "square.and.arrow.up"
+                        )
+                    }
+                    .accessibilityLabel(
+                        "Export operations"
+                    )
+
+                    Button {
+
+                        showAddOperation = true
+
+                    } label: {
+
+                        Image(
+                            systemName: "plus"
+                        )
+                    }
+                    .accessibilityLabel(
+                        "Add operation"
+                    )
+                }
+            }
             .overlay(
                 alignment: .bottomTrailing
             ) {
@@ -197,6 +213,12 @@ struct OperationsView: View {
                         category: category
                     )
                 }
+            }
+            .sheet(
+                isPresented: $showExport
+            ) {
+
+                ExportOperationsView()
             }
         }
     }
