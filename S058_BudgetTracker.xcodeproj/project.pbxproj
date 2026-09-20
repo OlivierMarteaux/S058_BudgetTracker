@@ -50,6 +50,7 @@
 		E8E28FA5305ED4D900A476B8 /* CSVDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVDocument.swift; sourceTree = "<group>"; };
 		E8E28FA8305FCDE200A476B8 /* OperationImportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationImportService.swift; sourceTree = "<group>"; };
 		E8E28FF3305FFCE700A476B8 /* UserBudgetStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBudgetStore.swift; sourceTree = "<group>"; };
+		E8E290093060300400A476B8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -121,6 +122,7 @@
 		E8E28F2E3052EAC000A476B8 = {
 			isa = PBXGroup;
 			children = (
+				E8E290093060300400A476B8 /* README.md */,
 				E8E28FA0305ED23800A476B8 /* Services */,
 				E8E28F923052F6BD00A476B8 /* BudgetTrackerWidgetExtension.entitlements */,
 				E8E28F393052EAC000A476B8 /* S058_BudgetTracker */,
