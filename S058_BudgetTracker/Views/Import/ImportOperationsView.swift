@@ -10,6 +10,39 @@ import SwiftUI
 import SwiftData
 import UniformTypeIdentifiers
 
+private func ensureCategoryExists(
+    named name: String,
+    in modelContext: ModelContext
+) throws {
+
+    let trimmedName = name.trimmingCharacters(
+        in: .whitespacesAndNewlines
+    )
+
+    guard !trimmedName.isEmpty else {
+        return
+    }
+
+    let descriptor = FetchDescriptor<Category>(
+        predicate: #Predicate {
+            $0.name == trimmedName
+        }
+    )
+
+    let existingCategories =
+        try modelContext.fetch(descriptor)
+
+    guard existingCategories.isEmpty else {
+        return
+    }
+
+    modelContext.insert(
+        Category(
+            name: trimmedName
+        )
+    )
+}
+
 struct ImportOperationsView: View {
 
     @Environment(\.dismiss)
@@ -118,6 +151,11 @@ struct ImportOperationsView: View {
                     )
 
             for item in imported {
+                
+                try ensureCategoryExists(
+                    named: item.category,
+                    in: modelContext
+                )
 
                 let operation = Operation(
                     date: item.date,

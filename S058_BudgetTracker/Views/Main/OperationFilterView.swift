@@ -5,7 +5,8 @@ struct OperationFilterView: View {
     @Binding var category: String
     @Binding var dateFilter: OperationDateFilter
 
-    let categories: [String]
+//    let categories: [String]
+    let categories: [Category]
 
     @Environment(\.dismiss)
     private var dismiss
@@ -30,10 +31,14 @@ struct OperationFilterView: View {
                         Text("All Categories")
                             .tag("All Categories")
 
-                        ForEach(categories, id: \.self) { category in
-
-                            Text(category)
-                                .tag(category)
+//                        ForEach(categories, id: \.self) { category in
+//
+//                            Text(category)
+//                                .tag(category)
+//                        }
+                        ForEach(categories) { category in
+                            Text(category.name)
+                                .tag(category.name)
                         }
                     }
                 }

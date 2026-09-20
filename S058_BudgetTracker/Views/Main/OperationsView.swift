@@ -38,16 +38,22 @@ struct OperationsView: View {
     @State private var isSelecting = false
     @State private var selectedOperationIDs: Set<UUID> = []
     
-    private var categories: [String] {
-
-        Array(
-            Set(
-                operations.map { $0.category }
-            )
-        )
-        .filter { !$0.isEmpty }
-        .sorted()
-    }
+//    private var categories: [String] {
+//
+//        Array(
+//            Set(
+//                operations.map { $0.category }
+//            )
+//        )
+//        .filter { !$0.isEmpty }
+//        .sorted()
+//    }
+    @Query(
+        sort: [
+            SortDescriptor(\Category.name)
+        ]
+    )
+    private var categories: [Category]
 
     private var filteredOperations: [Operation] {
 
