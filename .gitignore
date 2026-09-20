@@ -1,0 +1,31 @@
+# Xcode / Swift
+.DS_Store
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xcscmblueprint
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# Xcode user-specific project data
+*.xccheckout
+
+# Archives / generated products
+*.xcarchive
+*.ipa
+*.app
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Temporary files
+*.swp
+*.swo
+*~
+
