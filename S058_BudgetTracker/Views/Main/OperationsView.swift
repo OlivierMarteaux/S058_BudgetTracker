@@ -60,7 +60,7 @@ struct OperationsView: View {
         operations.filter { operation in
 
             let categoryMatches =
-                selectedCategory == "All Categories"
+                selectedCategory == "All Categories" || selectedCategory == "None" 
                 || operation.category == selectedCategory
 
             let dateMatches =

@@ -36,6 +36,8 @@ struct OperationFilterView: View {
 //                            Text(category)
 //                                .tag(category)
 //                        }
+                        Text("None")
+                            .tag("")
                         ForEach(categories) { category in
                             Text(category.name)
                                 .tag(category.name)

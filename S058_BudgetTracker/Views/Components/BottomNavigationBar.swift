@@ -10,18 +10,22 @@ enum AppTab: Hashable {
     case operations
     case recap
     case history
+    case categories
 
     var title: String {
 
         switch self {
         case .operations:
             return "Operations"
-
+            
         case .recap:
             return "Recap"
-
+            
         case .history:
             return "History"
+        
+        case .categories:
+            return "Categories"
         }
     }
 
@@ -36,6 +40,9 @@ enum AppTab: Hashable {
 
         case .history:
             return "chart.xyaxis.line"
+            
+        case .categories:
+            return "folder"
         }
     }
 }

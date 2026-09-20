@@ -65,6 +65,18 @@ struct S058_BudgetTrackerApp: App {
                     .tag(
                         AppTab.history
                     )
+                
+                CategoriesView()
+                    .tabItem {
+                        
+                        Label(
+                            "Categories",
+                            systemImage: "folder"
+                        )
+                    }
+                    .tag(
+                        AppTab.categories
+                    )
             }
             .onOpenURL { url in
 
