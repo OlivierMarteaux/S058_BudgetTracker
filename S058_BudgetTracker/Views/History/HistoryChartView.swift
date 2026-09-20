@@ -51,22 +51,28 @@ struct HistoryChartView: View {
                         Chart(monthlyTotals) {
                             monthlyTotal in
 
-                            BarMark(
-                                x: .value(
-                                    "Month",
-                                    monthlyTotal.month
-                                ),
-                                y: .value(
-                                    "Total",
-                                    Double(
-                                        monthlyTotal.totalInCents
-                                    ) / 100
-                                )
+//                            BarMark(
+//                                x: .value(
+//                                    "Month",
+//                                    monthlyTotal.month
+//                                ),
+//                                y: .value(
+//                                    "Total",
+//                                    Double(
+//                                        monthlyTotal.totalInCents
+//                                    ) / 100
+//                                )
+//                            )
+//                            .foregroundStyle(
+//                                AppTheme.primaryBlue
+//                            )
+//                            .cornerRadius(5)
+                            LineMark(
+                                x: .value("Month", monthlyTotal.month),
+                                y: .value("Amount", monthlyTotal.total)
                             )
-                            .foregroundStyle(
-                                AppTheme.primaryBlue
-                            )
-                            .cornerRadius(5)
+//                            .interpolationMethod(.catmullRom)
+                            .symbol(Circle())
                         }
                         .frame(
                             height: 320

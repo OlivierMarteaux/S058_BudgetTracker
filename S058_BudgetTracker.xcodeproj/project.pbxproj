@@ -12,6 +12,7 @@
 		E8E28F8B3052F4A600A476B8 /* BudgetTrackerWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E8E28F753052F4A500A476B8 /* BudgetTrackerWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E8E28FA6305ED58800A476B8 /* CSVDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E28FA5305ED4D900A476B8 /* CSVDocument.swift */; };
 		E8E28FA7305ED5A000A476B8 /* OperationExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E28FA1305ED24F00A476B8 /* OperationExportService.swift */; };
+		E8E28FA9305FCDE200A476B8 /* OperationImportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E28FA8305FCDE200A476B8 /* OperationImportService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		E8E28F923052F6BD00A476B8 /* BudgetTrackerWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BudgetTrackerWidgetExtension.entitlements; sourceTree = "<group>"; };
 		E8E28FA1305ED24F00A476B8 /* OperationExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationExportService.swift; sourceTree = "<group>"; };
 		E8E28FA5305ED4D900A476B8 /* CSVDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVDocument.swift; sourceTree = "<group>"; };
+		E8E28FA8305FCDE200A476B8 /* OperationImportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationImportService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -146,6 +148,7 @@
 		E8E28FA0305ED23800A476B8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E8E28FA8305FCDE200A476B8 /* OperationImportService.swift */,
 				E8E28FA5305ED4D900A476B8 /* CSVDocument.swift */,
 				E8E28FA1305ED24F00A476B8 /* OperationExportService.swift */,
 			);
@@ -263,6 +266,7 @@
 			files = (
 				E8E28FA6305ED58800A476B8 /* CSVDocument.swift in Sources */,
 				E8E28FA7305ED5A000A476B8 /* OperationExportService.swift in Sources */,
+				E8E28FA9305FCDE200A476B8 /* OperationImportService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

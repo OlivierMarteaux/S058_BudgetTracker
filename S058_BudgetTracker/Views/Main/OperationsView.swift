@@ -25,6 +25,7 @@ struct OperationsView: View {
 
     @State private var operationToEdit: Operation?
     @State private var showExport = false
+    @State private var showImport = false
     
     init(
         showAddOperation: Binding<Bool> = .constant(false)
@@ -134,6 +135,15 @@ struct OperationsView: View {
                 ) {
 
                     Button {
+                            showImport = true
+                        } label: {
+                            Image(
+                                systemName: "square.and.arrow.down"
+                            )
+                        }
+                        .accessibilityLabel("Import operations")
+                    
+                    Button {
 
                         showExport = true
 
@@ -219,6 +229,11 @@ struct OperationsView: View {
             ) {
 
                 ExportOperationsView()
+            }
+            .sheet(
+                isPresented: $showImport
+            ) {
+                ImportOperationsView()
             }
         }
     }
