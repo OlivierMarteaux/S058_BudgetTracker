@@ -10,6 +10,11 @@ import SwiftData
 import Charts
 
 struct HistoryChartView: View {
+    
+    @StateObject private var budgetStore: UserBudgetStore =
+        UserBudgetStore()
+
+    @State private var showUserBudget = false
 
     @Query(
         sort: [
@@ -18,6 +23,7 @@ struct HistoryChartView: View {
             )
         ]
     )
+    
     private var operations: [Operation]
 
     private let viewModel =
@@ -50,6 +56,34 @@ struct HistoryChartView: View {
 
                         Chart(monthlyTotals) {
                             monthlyTotal in
+                            
+                            if let budgetInCents =
+                                budgetStore.budgetInCents {
+
+                                RuleMark(
+                                    y: .value(
+                                        "Budget",
+                                        Double(budgetInCents) / 100
+                                    )
+                                )
+                                .foregroundStyle(.red)
+                                .lineStyle(
+                                    StrokeStyle(
+                                        lineWidth: 2,
+                                        dash: [6, 4]
+                                    )
+                                )
+                                .annotation(
+                                    position: .top,
+                                    alignment: .leading
+                                ) {
+                                    Text(
+                                        "Budget"
+                                    )
+                                    .font(.caption)
+                                    .foregroundStyle(.red)
+                                }
+                            }
 
 //                            BarMark(
 //                                x: .value(
@@ -109,14 +143,39 @@ struct HistoryChartView: View {
             .navigationTitle(
                 "History"
             )
+            .toolbar {
+
+                ToolbarItem(
+                    placement: .topBarTrailing
+                ) {
+
+                    Button {
+                        showUserBudget = true
+                    } label: {
+                        Image(
+                            systemName: "banknote"
+                        )
+                    }
+                    .accessibilityLabel(
+                        "User Budget"
+                    )
+                }
+            }
+            .sheet(
+                isPresented: $showUserBudget
+            ) {
+                UserBudgetView(
+                    budgetStore: budgetStore
+                )
+            }
         }
     }
 }
 
-#Preview {
-
-    HistoryChartView()
-        .modelContainer(
-            PersistenceController.preview
-        )
-}
+//#Preview {
+//
+//    HistoryChartView()
+//        .modelContainer(
+//            PersistenceController.preview
+//        )
+//}

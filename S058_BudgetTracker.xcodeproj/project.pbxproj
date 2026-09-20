@@ -13,6 +13,7 @@
 		E8E28FA6305ED58800A476B8 /* CSVDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E28FA5305ED4D900A476B8 /* CSVDocument.swift */; };
 		E8E28FA7305ED5A000A476B8 /* OperationExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E28FA1305ED24F00A476B8 /* OperationExportService.swift */; };
 		E8E28FA9305FCDE200A476B8 /* OperationImportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E28FA8305FCDE200A476B8 /* OperationImportService.swift */; };
+		E8E28FF4305FFCE700A476B8 /* UserBudgetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E28FF3305FFCE700A476B8 /* UserBudgetStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		E8E28FA1305ED24F00A476B8 /* OperationExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationExportService.swift; sourceTree = "<group>"; };
 		E8E28FA5305ED4D900A476B8 /* CSVDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVDocument.swift; sourceTree = "<group>"; };
 		E8E28FA8305FCDE200A476B8 /* OperationImportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationImportService.swift; sourceTree = "<group>"; };
+		E8E28FF3305FFCE700A476B8 /* UserBudgetStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBudgetStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -148,6 +150,7 @@
 		E8E28FA0305ED23800A476B8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E8E28FF3305FFCE700A476B8 /* UserBudgetStore.swift */,
 				E8E28FA8305FCDE200A476B8 /* OperationImportService.swift */,
 				E8E28FA5305ED4D900A476B8 /* CSVDocument.swift */,
 				E8E28FA1305ED24F00A476B8 /* OperationExportService.swift */,
@@ -265,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8E28FA6305ED58800A476B8 /* CSVDocument.swift in Sources */,
+				E8E28FF4305FFCE700A476B8 /* UserBudgetStore.swift in Sources */,
 				E8E28FA7305ED5A000A476B8 /* OperationExportService.swift in Sources */,
 				E8E28FA9305FCDE200A476B8 /* OperationImportService.swift in Sources */,
 			);
