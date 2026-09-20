@@ -65,6 +65,7 @@
 			membershipExceptions = (
 				Models/Category.swift,
 				Models/Operation.swift,
+				Models/OperationDateFilter.swift,
 			);
 			target = E8E28F743052F4A500A476B8 /* BudgetTrackerWidgetExtension */;
 		};

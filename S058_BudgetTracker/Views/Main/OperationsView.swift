@@ -27,6 +27,103 @@ struct OperationsView: View {
     @State private var showExport = false
     @State private var showImport = false
     
+    @State private var showFilter = false
+
+    @State private var selectedCategory =
+        "All Categories"
+
+    @State private var selectedDateFilter:
+        OperationDateFilter = .all
+    
+    private var categories: [String] {
+
+        Array(
+            Set(
+                operations.map { $0.category }
+            )
+        )
+        .filter { !$0.isEmpty }
+        .sorted()
+    }
+
+    private var filteredOperations: [Operation] {
+
+        operations.filter { operation in
+
+            let categoryMatches =
+                selectedCategory == "All Categories"
+                || operation.category == selectedCategory
+
+            let dateMatches =
+                matchesDateFilter(
+                    operation.date
+                )
+
+            return categoryMatches && dateMatches
+        }
+    }
+
+    private var isFilterActive: Bool {
+
+        selectedCategory != "All Categories"
+            || selectedDateFilter != .all
+    }
+    
+    private func matchesDateFilter(
+        _ date: Date
+    ) -> Bool {
+
+        let calendar = Calendar.current
+
+        switch selectedDateFilter {
+
+        case .all:
+            return true
+
+        case .thisMonth:
+
+            return calendar.isDate(
+                date,
+                equalTo: Date(),
+                toGranularity: .month
+            )
+
+        case .lastMonth:
+
+            guard let lastMonth = calendar.date(
+                byAdding: .month,
+                value: -1,
+                to: Date()
+            ) else {
+                return false
+            }
+
+            return calendar.isDate(
+                date,
+                equalTo: lastMonth,
+                toGranularity: .month
+            )
+
+        case let .custom(from, to):
+
+            let startOfDay = calendar.startOfDay(
+                for: from
+            )
+
+            guard let endOfDay = calendar.date(
+                bySettingHour: 23,
+                minute: 59,
+                second: 59,
+                of: to
+            ) else {
+                return false
+            }
+
+            return date >= startOfDay
+                && date <= endOfDay
+        }
+    }
+    
     init(
         showAddOperation: Binding<Bool> = .constant(false)
     ) {
@@ -53,11 +150,19 @@ struct OperationsView: View {
                             "Add your first operation using the + button."
                     )
 
+                } else if filteredOperations.isEmpty {
+
+                    EmptyStateView(
+                        title: "No matching operations",
+                        message:
+                            "No operations match the current filters."
+                    )
+
                 } else {
 
                     List {
 
-                        ForEach(operations) { operation in
+                        ForEach(filteredOperations) { operation in
 
                             OperationRowView(
                                 operation: operation
@@ -133,6 +238,19 @@ struct OperationsView: View {
                 ToolbarItemGroup(
                     placement: .topBarTrailing
                 ) {
+                    
+                    Button {
+                        showFilter = true
+                    } label: {
+
+                        Image(
+                            systemName:
+                                isFilterActive
+                                ? "line.3.horizontal.decrease.circle.fill"
+                                : "line.3.horizontal.decrease.circle"
+                        )
+                    }
+                    .accessibilityLabel("Filter operations")
 
                     Button {
                             showImport = true
@@ -234,6 +352,16 @@ struct OperationsView: View {
                 isPresented: $showImport
             ) {
                 ImportOperationsView()
+            }
+            .sheet(
+                isPresented: $showFilter
+            ) {
+
+                OperationFilterView(
+                    category: $selectedCategory,
+                    dateFilter: $selectedDateFilter,
+                    categories: categories
+                )
             }
         }
     }
