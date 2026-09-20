@@ -35,6 +35,9 @@ struct OperationsView: View {
     @State private var selectedDateFilter:
         OperationDateFilter = .all
     
+    @State private var isSelecting = false
+    @State private var selectedOperationIDs: Set<UUID> = []
+    
     private var categories: [String] {
 
         Array(
@@ -124,6 +127,26 @@ struct OperationsView: View {
         }
     }
     
+    private func deleteSelectedOperations() {
+
+        let selectedOperations = filteredOperations.filter {
+            selectedOperationIDs.contains($0.id)
+        }
+
+        viewModel.deleteOperations(
+            selectedOperations
+        )
+
+        selectedOperationIDs.removeAll()
+        isSelecting = false
+    }
+    
+    private func deleteOperation(
+        _ operation: Operation
+    ) {
+        viewModel.deleteOperation(operation)
+    }
+    
     init(
         showAddOperation: Binding<Bool> = .constant(false)
     ) {
@@ -160,13 +183,13 @@ struct OperationsView: View {
 
                 } else {
 
-                    List {
-
+                    List(selection: $selectedOperationIDs) {
                         ForEach(filteredOperations) { operation in
 
                             OperationRowView(
                                 operation: operation
                             )
+                            .tag(operation.id)
                             .listRowInsets(
                                 EdgeInsets(
                                     top: 5,
@@ -185,9 +208,7 @@ struct OperationsView: View {
                             ) {
 
                                 Button {
-
                                     operationToEdit = operation
-
                                 } label: {
 
                                     Label(
@@ -207,25 +228,20 @@ struct OperationsView: View {
                                 Button(
                                     role: .destructive
                                 ) {
-
-                                    viewModel.deleteOperation(
-                                        operation
-                                    )
-
+                                    deleteOperation(operation)
                                 } label: {
-
-                                    Label(
-                                        "Delete",
-                                        systemImage: "trash"
-                                    )
+                                    Image(systemName: "trash")
                                 }
                             }
                         }
                     }
-                    .listStyle(.plain)
-                    .scrollContentBackground(.hidden)
-                    .background(
-                        AppTheme.background
+                    .environment(
+                        \.editMode,
+                        .constant(
+                            isSelecting
+                            ? EditMode.active
+                            : EditMode.inactive
+                        )
                     )
                 }
             }
@@ -238,57 +254,108 @@ struct OperationsView: View {
                 ToolbarItemGroup(
                     placement: .topBarTrailing
                 ) {
-                    
-                    Button {
-                        showFilter = true
-                    } label: {
 
-                        Image(
-                            systemName:
-                                isFilterActive
-                                ? "line.3.horizontal.decrease.circle.fill"
-                                : "line.3.horizontal.decrease.circle"
-                        )
-                    }
-                    .accessibilityLabel("Filter operations")
+                    if isSelecting {
 
-                    Button {
-                            showImport = true
+                        Button {
+
+                            deleteSelectedOperations()
+
                         } label: {
+
                             Image(
-                                systemName: "square.and.arrow.down"
+                                systemName: "trash"
                             )
                         }
-                        .accessibilityLabel("Import operations")
-                    
-                    Button {
-
-                        showExport = true
-
-                    } label: {
-
-                        Image(
-                            systemName:
-                                "square.and.arrow.up"
+                        .disabled(
+                            selectedOperationIDs.isEmpty
                         )
-                    }
-                    .accessibilityLabel(
-                        "Export operations"
-                    )
-
-                    Button {
-
-                        showAddOperation = true
-
-                    } label: {
-
-                        Image(
-                            systemName: "plus"
+                        .accessibilityLabel(
+                            "Delete selected operations"
                         )
+
+                        Button("Done") {
+
+                            isSelecting = false
+                            selectedOperationIDs.removeAll()
+                        }
+                    } else {
+
+                        Button {
+
+                            isSelecting = true
+
+                        } label: {
+
+                            Image(
+                                systemName: "checklist"
+                            )
+                        }
+                        .accessibilityLabel(
+                            "Select operations"
+                        )
+
+                        Button {
+
+                            showFilter = true
+
+                        } label: {
+
+                            Image(
+                                systemName:
+                                    isFilterActive
+                                    ? "line.3.horizontal.decrease.circle.fill"
+                                    : "line.3.horizontal.decrease.circle"
+                            )
+                        }
+                        .accessibilityLabel(
+                            "Filter operations"
+                        )
+
+                        Button {
+
+                            showImport = true
+
+                        } label: {
+
+                            Image(
+                                systemName:
+                                    "square.and.arrow.down"
+                            )
+                        }
+                        .accessibilityLabel(
+                            "Import operations"
+                        )
+
+                        Button {
+
+                            showExport = true
+
+                        } label: {
+
+                            Image(
+                                systemName:
+                                    "square.and.arrow.up"
+                            )
+                        }
+                        .accessibilityLabel(
+                            "Export operations"
+                        )
+
+//                        Button {
+//
+//                            showAddOperation = true
+//
+//                        } label: {
+//
+//                            Image(
+//                                systemName: "plus"
+//                            )
+//                        }
+//                        .accessibilityLabel(
+//                            "Add operation"
+//                        )
                     }
-                    .accessibilityLabel(
-                        "Add operation"
-                    )
                 }
             }
             .overlay(

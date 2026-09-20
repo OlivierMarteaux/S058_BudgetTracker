@@ -43,10 +43,22 @@ final class OperationsViewModel: ObservableObject {
         save()
     }
 
+    func deleteOperations(
+        _ operations: [Operation]
+    ) {
+
+        for operation in operations {
+            modelContext.delete(operation)
+        }
+
+        save()
+    }
+    
     func deleteOperation(
         _ operation: Operation
     ) {
         modelContext.delete(operation)
+
         save()
     }
 
