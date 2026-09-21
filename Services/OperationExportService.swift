@@ -23,7 +23,7 @@ struct OperationExportService {
 
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.locale = Locale(identifier: "en_US_POSIX")    
 
         for operation in operations {
 

@@ -11,8 +11,18 @@ struct OperationImportService {
         case MMddyyyy = "MM/dd/yyyy"
         case ddMMyy = "dd/MM/yy"
         case MMddyy = "MM/dd/yy"
+        case yyyyMMddDash = "yyyy-MM-dd"
+        case yyyyddMMDash = "yyyy-dd-MM"
+        case yyMMddDash = "yy-MM-dd"
+        case yyddMMDash = "yy-dd-MM"
+        case ddMMyyyyDash = "dd-MM-yyyy"
+        case MMddyyyyDash = "MM-dd-yyyy"
+        case ddMMyyDash = "dd-MM-yy"
+        case MMddyyDash = "MM-dd-yy"
 
-        var id: String { rawValue }
+        var id: String {
+            rawValue
+        }
     }
 
     enum AmountFormat: String, CaseIterable, Identifiable {
@@ -20,7 +30,9 @@ struct OperationImportService {
         case commaDecimal = "Comma decimal (,)"
         case dotDecimal = "Dot decimal (.)"
 
-        var id: String { rawValue }
+        var id: String {
+            rawValue
+        }
     }
 
     static func importOperations(
@@ -29,10 +41,7 @@ struct OperationImportService {
         amountFormat: AmountFormat
     ) -> [ImportedOperation] {
 
-        guard var content = String(
-            data: data,
-            encoding: .utf8
-        ) else {
+        guard var content = decode(data) else {
             return []
         }
 
@@ -54,14 +63,25 @@ struct OperationImportService {
             return []
         }
 
+        let separator = detectSeparator(
+            from: lines[0]
+        )
+
         let formatter = DateFormatter()
         formatter.dateFormat = dateFormat.rawValue
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(
+            identifier: "en_US_POSIX"
+        )
+        formatter.calendar = Calendar(
+            identifier: .gregorian
+        )
 
         return lines.dropFirst().compactMap { line in
 
-            let fields = parseCSVLine(line)
+            let fields = parseCSVLine(
+                line,
+                separator: separator
+            )
 
             guard fields.count >= 4 else {
                 return nil
@@ -97,8 +117,9 @@ struct OperationImportService {
                 normalizedAmount = amountString
             }
 
-            guard let amount = Double(normalizedAmount)
-            else {
+            guard let amount = Double(
+                normalizedAmount
+            ) else {
                 return nil
             }
 
@@ -115,8 +136,72 @@ struct OperationImportService {
         }
     }
 
+    // MARK: - Encoding detection
+
+    private static func decode(
+        _ data: Data
+    ) -> String? {
+
+        // UTF-8 BOM
+        if data.starts(
+            with: [0xEF, 0xBB, 0xBF]
+        ) {
+            return String(
+                data: data,
+                encoding: .utf8
+            )
+        }
+
+        // UTF-8
+        if let content = String(
+            data: data,
+            encoding: .utf8
+        ) {
+            return content
+        }
+
+        // ANSI / Windows-1252
+        return String(
+            data: data,
+            encoding: .windowsCP1252
+        )
+    }
+
+    // MARK: - Separator detection
+
+    private static func detectSeparator(
+        from header: String
+    ) -> Character {
+
+        let candidates: [Character] = [
+            ",",
+            ";",
+            "\t"
+        ]
+
+        var bestSeparator: Character = ","
+        var highestCount = 0
+
+        for separator in candidates {
+
+            let count = header.filter {
+                $0 == separator
+            }.count
+
+            if count > highestCount {
+                highestCount = count
+                bestSeparator = separator
+            }
+        }
+
+        return bestSeparator
+    }
+
+    // MARK: - CSV parsing
+
     private static func parseCSVLine(
-        _ line: String
+        _ line: String,
+        separator: Character
     ) -> [String] {
 
         var fields: [String] = []
@@ -141,13 +226,15 @@ struct OperationImportService {
 
                     current.append("\"")
 
-                    index = line.index(after: index)
+                    index = line.index(
+                        after: index
+                    )
 
                 } else {
                     insideQuotes.toggle()
                 }
 
-            } else if character == ","
+            } else if character == separator
                         && !insideQuotes {
 
                 fields.append(current)
@@ -157,7 +244,9 @@ struct OperationImportService {
                 current.append(character)
             }
 
-            index = line.index(after: index)
+            index = line.index(
+                after: index
+            )
         }
 
         fields.append(current)
