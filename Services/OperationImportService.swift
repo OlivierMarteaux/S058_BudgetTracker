@@ -1,17 +1,32 @@
-//
-//  OperationImportService.swift
-//  S058_BudgetTracker
-//
-//  Created by Olivier Marteaux on 20/09/2026.
-//
-
-
 import Foundation
 
 struct OperationImportService {
 
+    enum DateFormat: String, CaseIterable, Identifiable {
+        case yyyyMMdd = "yyyy/MM/dd"
+        case yyyyddMM = "yyyy/dd/MM"
+        case yyMMdd = "yy/MM/dd"
+        case yyddMM = "yy/dd/MM"
+        case ddMMyyyy = "dd/MM/yyyy"
+        case MMddyyyy = "MM/dd/yyyy"
+        case ddMMyy = "dd/MM/yy"
+        case MMddyy = "MM/dd/yy"
+
+        var id: String { rawValue }
+    }
+
+    enum AmountFormat: String, CaseIterable, Identifiable {
+        case integer = "Integer"
+        case commaDecimal = "Comma decimal (,)"
+        case dotDecimal = "Dot decimal (.)"
+
+        var id: String { rawValue }
+    }
+
     static func importOperations(
-        from data: Data
+        from data: Data,
+        dateFormat: DateFormat,
+        amountFormat: AmountFormat
     ) -> [ImportedOperation] {
 
         guard var content = String(
@@ -21,28 +36,17 @@ struct OperationImportService {
             return []
         }
 
-        // Remove UTF-8 BOM if present
+        // Remove UTF-8 BOM if present.
         content = content.replacingOccurrences(
             of: "\u{FEFF}",
             with: ""
         )
 
-        // Normalize Windows / Mac / Unix line endings
-        content = content
-            .replacingOccurrences(
-                of: "\r\n",
-                with: "\n"
-            )
-            .replacingOccurrences(
-                of: "\r",
-                with: "\n"
-            )
-
         let lines = content
-            .components(separatedBy: "\n")
+            .components(separatedBy: .newlines)
             .filter {
                 !$0.trimmingCharacters(
-                    in: .whitespaces
+                    in: .whitespacesAndNewlines
                 ).isEmpty
             }
 
@@ -51,8 +55,9 @@ struct OperationImportService {
         }
 
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = dateFormat.rawValue
         formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.calendar = Calendar(identifier: .gregorian)
 
         return lines.dropFirst().compactMap { line in
 
@@ -63,20 +68,37 @@ struct OperationImportService {
             }
 
             guard let date = formatter.date(
-                from: fields[0]
+                from: fields[0].trimmingCharacters(
+                    in: .whitespaces
+                )
             ) else {
                 return nil
             }
 
-            let normalizedAmount = fields[3]
-                .replacingOccurrences(
-                    of: ",",
-                    with: "."
+            let amountString = fields[3]
+                .trimmingCharacters(
+                    in: .whitespaces
                 )
 
-            guard let amount = Double(
-                normalizedAmount
-            ) else {
+            let normalizedAmount: String
+
+            switch amountFormat {
+            case .integer:
+                normalizedAmount = amountString
+
+            case .commaDecimal:
+                normalizedAmount = amountString
+                    .replacingOccurrences(
+                        of: ",",
+                        with: "."
+                    )
+
+            case .dotDecimal:
+                normalizedAmount = amountString
+            }
+
+            guard let amount = Double(normalizedAmount)
+            else {
                 return nil
             }
 
@@ -114,16 +136,12 @@ struct OperationImportService {
                        before: line.endIndex
                    ),
                    line[
-                       line.index(
-                           after: index
-                       )
+                       line.index(after: index)
                    ] == "\"" {
 
                     current.append("\"")
 
-                    index = line.index(
-                        after: index
-                    )
+                    index = line.index(after: index)
 
                 } else {
                     insideQuotes.toggle()
@@ -139,9 +157,7 @@ struct OperationImportService {
                 current.append(character)
             }
 
-            index = line.index(
-                after: index
-            )
+            index = line.index(after: index)
         }
 
         fields.append(current)

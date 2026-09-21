@@ -52,6 +52,12 @@ struct ImportOperationsView: View {
     private var modelContext
 
     @State private var showImporter = false
+    
+    @State private var selectedDateFormat =
+        OperationImportService.DateFormat.yyyyMMdd
+
+    @State private var selectedAmountFormat =
+        OperationImportService.AmountFormat.dotDecimal
 
     var body: some View {
 
@@ -66,6 +72,36 @@ struct ImportOperationsView: View {
                     )
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
+                    
+                    Section("Date format") {
+                        Picker(
+                            "Format",
+                            selection: $selectedDateFormat
+                        ) {
+                            ForEach(
+                                OperationImportService.DateFormat.allCases
+                            ) { format in
+
+                                Text(format.rawValue)
+                                    .tag(format)
+                            }
+                        }
+                    }
+
+                    Section("Amount format") {
+                        Picker(
+                            "Format",
+                            selection: $selectedAmountFormat
+                        ) {
+                            ForEach(
+                                OperationImportService.AmountFormat.allCases
+                            ) { format in
+
+                                Text(format.rawValue)
+                                    .tag(format)
+                            }
+                        }
+                    }
 
                     Button {
                         showImporter = true
@@ -144,11 +180,17 @@ struct ImportOperationsView: View {
                 contentsOf: url
             )
 
+//            let imported =
+//                OperationImportService
+//                    .importOperations(
+//                        from: data
+//                    )
             let imported =
-                OperationImportService
-                    .importOperations(
-                        from: data
-                    )
+                OperationImportService.importOperations(
+                    from: data,
+                    dateFormat: selectedDateFormat,
+                    amountFormat: selectedAmountFormat
+                )
 
             for item in imported {
                 
