@@ -372,7 +372,8 @@ struct OperationsView: View {
 
                     showAddOperation = true
                 }
-                .padding(20)
+                .padding(.trailing, 20)
+                .padding(.bottom, 80)
             }
             .sheet(
                 isPresented: $showAddOperation
