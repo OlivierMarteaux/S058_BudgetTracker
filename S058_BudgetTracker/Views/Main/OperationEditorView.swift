@@ -172,7 +172,7 @@ struct OperationEditorView: View {
                 Section {
 
                     Text(
-                        "Positive amount = income\nNegative amount = expense"
+                        "Positive amount = expense\nNegative amount = income"
                     )
                     .font(.caption)
                     .foregroundStyle(.secondary)
@@ -180,8 +180,8 @@ struct OperationEditorView: View {
             }
             .navigationTitle(
                 isEditing
-                    ? "Edit operation"
-                    : "New operation"
+                ? String(localized: "operation_editor.edit_operation")
+                    : String(localized: "operation_editor.new_operation")
             )
             .navigationBarTitleDisplayMode(
                 .inline

@@ -14,6 +14,8 @@
 		E8E28FA7305ED5A000A476B8 /* OperationExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E28FA1305ED24F00A476B8 /* OperationExportService.swift */; };
 		E8E28FA9305FCDE200A476B8 /* OperationImportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E28FA8305FCDE200A476B8 /* OperationImportService.swift */; };
 		E8E28FF4305FFCE700A476B8 /* UserBudgetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E28FF3305FFCE700A476B8 /* UserBudgetStore.swift */; };
+		E8E2900B30616B3A00A476B8 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E8E2900A30616B3A00A476B8 /* Localizable.xcstrings */; };
+		E8E2900C30616B3A00A476B8 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E8E2900A30616B3A00A476B8 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,7 @@
 		E8E28FA8305FCDE200A476B8 /* OperationImportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationImportService.swift; sourceTree = "<group>"; };
 		E8E28FF3305FFCE700A476B8 /* UserBudgetStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBudgetStore.swift; sourceTree = "<group>"; };
 		E8E290093060300400A476B8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E8E2900A30616B3A00A476B8 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -122,6 +125,7 @@
 		E8E28F2E3052EAC000A476B8 = {
 			isa = PBXGroup;
 			children = (
+				E8E2900A30616B3A00A476B8 /* Localizable.xcstrings */,
 				E8E290093060300400A476B8 /* README.md */,
 				E8E28FA0305ED23800A476B8 /* Services */,
 				E8E28F923052F6BD00A476B8 /* BudgetTrackerWidgetExtension.entitlements */,
@@ -234,6 +238,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = E8E28F2E3052EAC000A476B8;
 			minimizedProjectReferenceProxies = 1;
@@ -253,6 +258,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8E2900C30616B3A00A476B8 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8E2900B30616B3A00A476B8 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +362,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -412,6 +420,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

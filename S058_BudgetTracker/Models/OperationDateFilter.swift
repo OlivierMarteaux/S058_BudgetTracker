@@ -22,20 +22,27 @@ enum OperationDateFilterOption: String, CaseIterable, Identifiable {
     }
 
     var title: String {
-
         switch self {
 
         case .all:
-            return "All Dates"
+            return String(
+                localized: "operation_date_filter.all"
+            )
 
         case .thisMonth:
-            return "This Month"
+            return String(
+                localized: "operation_date_filter.this_month"
+            )
 
         case .lastMonth:
-            return "Last Month"
+            return String(
+                localized: "operation_date_filter.last_month"
+            )
 
         case .custom:
-            return "Custom Range"
+            return String(
+                localized: "operation_date_filter.custom"
+            )
         }
     }
 }

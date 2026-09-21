@@ -82,7 +82,7 @@ struct ImportOperationsView: View {
                                 OperationImportService.DateFormat.allCases
                             ) { format in
 
-                                Text(format.rawValue)
+                                Text(format.title)
                                     .tag(format)
                             }
                         }
@@ -97,7 +97,7 @@ struct ImportOperationsView: View {
                                 OperationImportService.AmountFormat.allCases
                             ) { format in
 
-                                Text(format.rawValue)
+                                Text(format.title)
                                     .tag(format)
                             }
                         }

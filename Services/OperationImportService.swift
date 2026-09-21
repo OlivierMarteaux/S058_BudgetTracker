@@ -23,15 +23,108 @@ struct OperationImportService {
         var id: String {
             rawValue
         }
+        
+        var title: String {
+            switch self {
+
+            case .yyyyMMdd:
+                return String(
+                    localized: "date_format.yyyyMMdd"
+                )
+
+            case .yyyyddMM:
+                return String(
+                    localized: "date_format.yyyyddMM"
+                )
+
+            case .yyMMdd:
+                return String(
+                    localized: "date_format.yyMMdd"
+                )
+            case .yyddMM:
+                return String(
+                    localized: "date_format.yyddMM"
+                )
+            case .ddMMyyyy:
+                return String(
+                    localized: "date_format.ddMMyyyy"
+                )
+            case .MMddyyyy:
+                return String(
+                    localized: "date_format.MMddyyyy"
+                )
+            case .ddMMyy:
+                return String(
+                    localized: "date_format.ddMMyy"
+                )
+            case .MMddyy:
+                return String(
+                    localized: "date_format.MMddyy"
+                )
+            case .yyyyMMddDash:
+                return String(
+                    localized: "date_format.yyyyMMddDash"
+                )
+            case .yyyyddMMDash:
+                return String(
+                    localized: "date_format.yyyyddMMDash"
+                )
+            case .yyMMddDash:
+                return String(
+                    localized: "date_format.yyMMddDash"
+                )
+            case .yyddMMDash:
+                return String(
+                    localized: "date_format.yyddMMDash"
+                )
+            case .ddMMyyyyDash:
+                return String(
+                    localized: "date_format.ddMMyyyyDash"
+                )
+            case .MMddyyyyDash:
+                return String(
+                    localized: "date_format.MMddyyyyDash"
+                )
+            case .ddMMyyDash:
+                return String(
+                    localized: "date_format.ddMMyyDash"
+                )
+            case .MMddyyDash:
+                return String(
+                    localized: "date_format.MMddyyDash"
+                )
+            }
+        }
     }
 
     enum AmountFormat: String, CaseIterable, Identifiable {
-        case integer = "Integer"
-        case commaDecimal = "Comma decimal (,)"
-        case dotDecimal = "Dot decimal (.)"
+
+        case integer
+        case commaDecimal
+        case dotDecimal
 
         var id: String {
             rawValue
+        }
+
+        var title: String {
+            switch self {
+
+            case .integer:
+                return String(
+                    localized: "amount_format.integer"
+                )
+
+            case .commaDecimal:
+                return String(
+                    localized: "amount_format.comma_decimal"
+                )
+
+            case .dotDecimal:
+                return String(
+                    localized: "amount_format.dot_decimal"
+                )
+            }
         }
     }
 

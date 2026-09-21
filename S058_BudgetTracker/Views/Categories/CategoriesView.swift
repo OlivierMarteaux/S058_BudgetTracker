@@ -178,7 +178,7 @@ struct CategoriesView: View {
             ) {
 
                 CategoryEditorView(
-                    title: "New Category"
+                    title: String(localized: "category_editor.new_category")
                 ) { name in
 
                     viewModel.addCategory(
@@ -191,7 +191,7 @@ struct CategoriesView: View {
             ) { category in
 
                 CategoryEditorView(
-                    title: "Edit Category",
+                    title: String(localized: "category_editor.edit_category"),
                     initialName: category.name
                 ) { name in
 
