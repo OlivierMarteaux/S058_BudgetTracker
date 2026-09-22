@@ -270,7 +270,7 @@ struct HistoryChartView: View {
                                 .background(
                                     showMonthlyTotal
                                         ? AppTheme.primaryBlue
-                                        : Color.gray
+                                    : AppTheme.cardBackground
                                 )
                                 .foregroundStyle(.white)
                                 .clipShape(
@@ -330,7 +330,7 @@ struct HistoryChartView: View {
                                         .background(
                                             isVisible
                                                 ? categoryColor
-                                                : Color.gray
+                                            : AppTheme.cardBackground
                                         )
                                         .foregroundStyle(.white)
                                         .clipShape(
@@ -347,6 +347,7 @@ struct HistoryChartView: View {
                             }
                         }
                     }
+                    .padding(.horizontal, 16)
                 }
             }
             .navigationTitle(

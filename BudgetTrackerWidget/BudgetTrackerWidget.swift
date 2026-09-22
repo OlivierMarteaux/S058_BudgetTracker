@@ -110,7 +110,8 @@ struct BudgetTrackerWidget: Widget {
             "Quickly add a new budget operation."
         )
         .supportedFamilies([
-            .systemSmall
+            .systemSmall,
+            .systemMedium
         ])
     }
 }

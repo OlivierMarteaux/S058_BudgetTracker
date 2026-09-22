@@ -199,9 +199,9 @@ struct OperationsView: View {
                             .listRowInsets(
                                 EdgeInsets(
                                     top: 5,
-                                    leading: 16,
+                                    leading: 0,
                                     bottom: 5,
-                                    trailing: 16
+                                    trailing: 0
                                 )
                             )
                             .listRowSeparator(.hidden)
