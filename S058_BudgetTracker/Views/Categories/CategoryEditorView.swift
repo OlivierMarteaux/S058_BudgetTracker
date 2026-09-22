@@ -1,36 +1,38 @@
-//
-//  CategoryEditorView.swift
-//  S058_BudgetTracker
-//
-//  Created by Olivier Marteaux on 20/09/2026.
-//
-
-
 import SwiftUI
 
 struct CategoryEditorView: View {
 
     let title: String
     let initialName: String
-    let onSave: (String) -> Void
+    let initialBudgetInCents: Int?
+    let onSave: (String, Int?) -> Void
 
     @Environment(\.dismiss)
     private var dismiss
 
     @State private var name: String
+    @State private var budget: String
 
     init(
         title: String,
         initialName: String = "",
-        onSave: @escaping (String) -> Void
+        initialBudgetInCents: Int? = nil,
+        onSave: @escaping (String, Int?) -> Void
     ) {
-
         self.title = title
         self.initialName = initialName
+        self.initialBudgetInCents = initialBudgetInCents
         self.onSave = onSave
 
         _name = State(
             initialValue: initialName
+        )
+
+        _budget = State(
+            initialValue:
+                initialBudgetInCents.map {
+                    String($0 / 100)
+                } ?? ""
         )
     }
 
@@ -44,6 +46,12 @@ struct CategoryEditorView: View {
                     "Category name",
                     text: $name
                 )
+
+                TextField(
+                    "Monthly budget",
+                    text: $budget
+                )
+                .keyboardType(.numberPad)
             }
             .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
@@ -73,7 +81,30 @@ struct CategoryEditorView: View {
                             return
                         }
 
-                        onSave(trimmedName)
+                        let trimmedBudget =
+                            budget.trimmingCharacters(
+                                in: .whitespacesAndNewlines
+                            )
+
+                        let budgetInCents: Int?
+
+                        if trimmedBudget.isEmpty {
+                            budgetInCents = nil
+                        } else if let value =
+                                    Int(trimmedBudget),
+                                  value >= 0 {
+
+                            budgetInCents = value * 100
+
+                        } else {
+                            return
+                        }
+
+                        onSave(
+                            trimmedName,
+                            budgetInCents
+                        )
+
                         dismiss()
                     }
                 }

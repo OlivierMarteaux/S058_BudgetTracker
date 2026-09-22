@@ -20,9 +20,9 @@ final class CategoriesViewModel: ObservableObject {
     }
 
     func addCategory(
-        name: String
+        name: String,
+        budgetInCents: Int?
     ) {
-
         let trimmedName = name.trimmingCharacters(
             in: .whitespacesAndNewlines
         )
@@ -38,7 +38,8 @@ final class CategoriesViewModel: ObservableObject {
         }
 
         let category = Category(
-            name: trimmedName
+            name: trimmedName,
+            budgetInCents: budgetInCents
         )
 
         modelContext.insert(category)
@@ -47,9 +48,9 @@ final class CategoriesViewModel: ObservableObject {
 
     func updateCategory(
         _ category: Category,
-        name: String
+        name: String,
+        budgetInCents: Int?
     ) {
-
         let trimmedName = name.trimmingCharacters(
             in: .whitespacesAndNewlines
         )
@@ -60,19 +61,15 @@ final class CategoriesViewModel: ObservableObject {
 
         let oldName = category.name
 
-        guard oldName != trimmedName else {
+        guard oldName == trimmedName ||
+                !categoryExists(
+                    named: trimmedName,
+                    excluding: category
+                )
+        else {
             return
         }
 
-        guard !categoryExists(
-            named: trimmedName,
-            excluding: category
-        ) else {
-            return
-        }
-
-        // Propagate the category rename
-        // to all concerned operations.
         let descriptor = FetchDescriptor<Operation>(
             predicate: #Predicate {
                 $0.category == oldName
@@ -80,7 +77,6 @@ final class CategoriesViewModel: ObservableObject {
         )
 
         do {
-
             let operations =
                 try modelContext.fetch(descriptor)
 
@@ -89,11 +85,11 @@ final class CategoriesViewModel: ObservableObject {
             }
 
             category.name = trimmedName
+            category.budgetInCents = budgetInCents
 
             save()
 
         } catch {
-
             print(
                 "Failed to update category: \(error)"
             )

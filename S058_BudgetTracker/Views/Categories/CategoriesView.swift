@@ -178,11 +178,14 @@ struct CategoriesView: View {
             ) {
 
                 CategoryEditorView(
-                    title: String(localized: "category_editor.new_category")
-                ) { name in
+                    title: String(
+                        localized: "category_editor.new_category"
+                    )
+                ) { name, budgetInCents in
 
                     viewModel.addCategory(
-                        name: name
+                        name: name,
+                        budgetInCents: budgetInCents
                     )
                 }
             }
@@ -191,13 +194,17 @@ struct CategoriesView: View {
             ) { category in
 
                 CategoryEditorView(
-                    title: String(localized: "category_editor.edit_category"),
-                    initialName: category.name
-                ) { name in
+                    title: String(
+                        localized: "category_editor.edit_category"
+                    ),
+                    initialName: category.name,
+                    initialBudgetInCents: category.budgetInCents
+                ) { name, budgetInCents in
 
                     viewModel.updateCategory(
                         category,
-                        name: name
+                        name: name,
+                        budgetInCents: budgetInCents
                     )
                 }
             }
