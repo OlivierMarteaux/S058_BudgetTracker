@@ -1,6 +1,16 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@, %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$@"
+          }
+        }
+      }
+    },
     "Add" : {
       "localizations" : {
         "fr" : {
@@ -628,6 +638,9 @@
           }
         }
       }
+    },
+    "Monthly total" : {
+
     },
     "New category" : {
       "localizations" : {
