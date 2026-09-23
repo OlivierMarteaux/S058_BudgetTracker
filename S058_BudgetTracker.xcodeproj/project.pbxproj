@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E8700E483062E9A5007B9172 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E8700E473062E9A5007B9172 /* GoogleService-Info.plist */; };
+		E8700E4B3062EAD5007B9172 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E8700E4A3062EAD5007B9172 /* FirebaseAnalytics */; };
+		E8700E4D3062EAD5007B9172 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = E8700E4C3062EAD5007B9172 /* FirebaseCrashlytics */; };
 		E8E28F783052F4A500A476B8 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E28F773052F4A500A476B8 /* WidgetKit.framework */; };
 		E8E28F7A3052F4A500A476B8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E28F793052F4A500A476B8 /* SwiftUI.framework */; };
 		E8E28F8B3052F4A600A476B8 /* BudgetTrackerWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E8E28F753052F4A500A476B8 /* BudgetTrackerWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -43,6 +46,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E8700E473062E9A5007B9172 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E8E28F373052EAC000A476B8 /* S058_BudgetTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = S058_BudgetTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E28F753052F4A500A476B8 /* BudgetTrackerWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BudgetTrackerWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E28F773052F4A500A476B8 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -107,6 +111,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8700E4B3062EAD5007B9172 /* FirebaseAnalytics in Frameworks */,
+				E8700E4D3062EAD5007B9172 /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +131,7 @@
 		E8E28F2E3052EAC000A476B8 = {
 			isa = PBXGroup;
 			children = (
+				E8700E473062E9A5007B9172 /* GoogleService-Info.plist */,
 				E8E2900A30616B3A00A476B8 /* Localizable.xcstrings */,
 				E8E290093060300400A476B8 /* README.md */,
 				E8E28FA0305ED23800A476B8 /* Services */,
@@ -187,6 +194,8 @@
 			);
 			name = S058_BudgetTracker;
 			packageProductDependencies = (
+				E8700E4A3062EAD5007B9172 /* FirebaseAnalytics */,
+				E8700E4C3062EAD5007B9172 /* FirebaseCrashlytics */,
 			);
 			productName = S058_BudgetTracker;
 			productReference = E8E28F373052EAC000A476B8 /* S058_BudgetTracker.app */;
@@ -242,6 +251,9 @@
 			);
 			mainGroup = E8E28F2E3052EAC000A476B8;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E8700E493062EAD5007B9172 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E8E28F383052EAC000A476B8 /* Products */;
 			projectDirPath = "";
@@ -259,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8E2900C30616B3A00A476B8 /* Localizable.xcstrings in Resources */,
+				E8700E483062E9A5007B9172 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,6 +603,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E8700E493062EAD5007B9172 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.19.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E8700E4A3062EAD5007B9172 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8700E493062EAD5007B9172 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		E8700E4C3062EAD5007B9172 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8700E493062EAD5007B9172 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E8E28F2F3052EAC000A476B8 /* Project object */;
 }

@@ -272,7 +272,9 @@ struct HistoryChartView: View {
                                         ? AppTheme.primaryBlue
                                     : AppTheme.cardBackground
                                 )
-                                .foregroundStyle(.white)
+                                .foregroundStyle(
+                                    showMonthlyTotal ? .white : .primary
+                                )
                                 .clipShape(
                                     RoundedRectangle(
                                         cornerRadius:
@@ -332,7 +334,7 @@ struct HistoryChartView: View {
                                                 ? categoryColor
                                             : AppTheme.cardBackground
                                         )
-                                        .foregroundStyle(.white)
+//                                        .foregroundStyle(.white)
                                         .clipShape(
                                             RoundedRectangle(
                                                 cornerRadius:
@@ -348,6 +350,9 @@ struct HistoryChartView: View {
                         }
                     }
                     .padding(.horizontal, 16)
+                    .background(
+                        AppTheme.background
+                    )
                 }
             }
             .navigationTitle(

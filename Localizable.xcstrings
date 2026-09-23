@@ -640,7 +640,14 @@
       }
     },
     "Monthly total" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total mensuel"
+          }
+        }
+      }
     },
     "New category" : {
       "localizations" : {
