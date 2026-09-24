@@ -161,7 +161,7 @@ struct OperationEditorView: View {
                     }
 
                     TextField(
-                        "Amount (€)",
+                        "Amount",
                         text: $amount
                     )
                     .keyboardType(

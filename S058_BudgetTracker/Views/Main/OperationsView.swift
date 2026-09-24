@@ -37,6 +37,7 @@ struct OperationsView: View {
     
     @State private var isSelecting = false
     @State private var selectedOperationIDs: Set<UUID> = []
+    @State private var showSettings = false
     
 //    private var categories: [String] {
 //
@@ -199,7 +200,7 @@ struct OperationsView: View {
                             .listRowInsets(
                                 EdgeInsets(
                                     top: 5,
-                                    leading: 0,
+                                    leading: isSelecting ? 16 : 0,
                                     bottom: 5,
                                     trailing: 0
                                 )
@@ -361,6 +362,13 @@ struct OperationsView: View {
 //                        .accessibilityLabel(
 //                            "Add operation"
 //                        )
+                        
+                        Button {
+                            showSettings = true
+                        } label: {
+                            Image(systemName: "gearshape")
+                        }
+                        .accessibilityLabel("Settings")
                     }
                 }
             }
@@ -426,6 +434,9 @@ struct OperationsView: View {
                 isPresented: $showImport
             ) {
                 ImportOperationsView()
+            }
+            .sheet(isPresented: $showSettings) {
+                SettingsView()
             }
             .sheet(
                 isPresented: $showFilter

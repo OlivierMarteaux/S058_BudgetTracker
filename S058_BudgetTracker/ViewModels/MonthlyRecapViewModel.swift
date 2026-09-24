@@ -16,16 +16,16 @@ struct MonthlyTotal: Identifiable {
         Decimal(totalInCents) / 100
     }
 
-    var formattedTotal: String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.currencyCode = "EUR"
-        formatter.locale = Locale(identifier: "fr_FR")
+    func formattedTotal(currencySymbol: String) -> String {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .currency
+            formatter.currencySymbol = currencySymbol
+            formatter.locale = Locale(identifier: "fr_FR")
 
-        return formatter.string(
-            from: NSDecimalNumber(decimal: total)
-        ) ?? "\(totalInCents) €"
-    }
+            return formatter.string(
+                from: NSDecimalNumber(decimal: total)
+            ) ?? "\(totalInCents) \(currencySymbol)"
+        }
 }
 
 @MainActor

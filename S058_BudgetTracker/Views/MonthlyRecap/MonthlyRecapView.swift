@@ -29,6 +29,13 @@ struct MonthlyRecapView: View {
             from: operations
         )
     }
+    
+    @AppStorage("selectedCurrency")
+    private var selectedCurrency = Currency.eur.rawValue
+
+    private var currency: Currency {
+        Currency(rawValue: selectedCurrency) ?? .eur
+    }
 
     var body: some View {
 
@@ -62,7 +69,9 @@ struct MonthlyRecapView: View {
                             Spacer()
 
                             Text(
-                                monthlyTotal.formattedTotal
+                                monthlyTotal.formattedTotal(
+                                    currencySymbol: currency.symbol
+                                )
                             )
                             .fontWeight(.semibold)
                             .foregroundStyle(

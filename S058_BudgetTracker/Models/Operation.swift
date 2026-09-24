@@ -32,14 +32,15 @@ final class Operation {
         amountInCents >= 0
     }
 
-    var formattedAmount: String {
+    func formattedAmount(currencySymbol: String) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.currencyCode = "EUR"
+        formatter.currencySymbol = currencySymbol
         formatter.locale = Locale(identifier: "fr_FR")
 
         let value = NSDecimalNumber(decimal: amount)
+
         return formatter.string(from: value)
-            ?? "\(amountInCents) €"
+            ?? "\(amountInCents) \(currencySymbol)"
     }
 }

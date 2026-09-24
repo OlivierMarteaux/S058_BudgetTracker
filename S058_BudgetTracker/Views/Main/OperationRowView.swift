@@ -11,10 +11,17 @@ struct OperationRowView: View {
 
     let operation: Operation
 
+    @AppStorage("selectedCurrency")
+    private var selectedCurrency = Currency.eur.rawValue
+
     private var amountColor: Color {
         operation.isIncome
             ? AppTheme.positive
             : AppTheme.negative
+    }
+
+    private var currency: Currency {
+        Currency(rawValue: selectedCurrency) ?? .eur
     }
 
     var body: some View {
@@ -57,10 +64,14 @@ struct OperationRowView: View {
 
             Spacer()
 
-            Text(operation.formattedAmount)
-                .font(.body)
-                .fontWeight(.semibold)
-                .foregroundStyle(amountColor)
+            Text(
+                operation.formattedAmount(
+                    currencySymbol: currency.symbol
+                )
+            )
+            .font(.body)
+            .fontWeight(.semibold)
+            .foregroundStyle(amountColor)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 14)
