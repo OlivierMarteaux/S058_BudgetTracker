@@ -10,27 +10,27 @@ nonisolated let logger = Logger(
 
 struct AddOperationIntent: AppIntent {
 
-    static var title: LocalizedStringResource = "Enregistrer une opération dans Budget Tracker."
+    static var title: LocalizedStringResource = "Add an expense to Budget Tracker."
 
     static var description = IntentDescription(
-        "Enregistre une opération dans Budget Tracker."
+        "Add a new expense to Budget Tracker."
     )
 
     @Parameter(
-        title: "Montant",
-        description: "Montant de la dépense"
+        title: "Amount",
+        description: "Expense amount"
     )
     var amount: String
 
     @Parameter(
         title: "Description",
-        description: "Description de la dépense"
+        description: "expense description"
     )
     var operationDescription: String
 
     @Parameter(
-        title: "Catégorie",
-        description: "Catégorie de la dépense"
+        title: "Category",
+        description: "Expense category"
     )
     var category: String
 
@@ -82,7 +82,31 @@ struct AddOperationIntent: AppIntent {
             "trente": 30,
             "quarante": 40,
             "cinquante": 50,
-            "soixante": 60
+            "soixante": 60,
+            
+            // English
+            "zero": 0,
+            "one": 1,
+            "a": 1,
+            "two": 2,
+            "three": 3,
+            "four": 4,
+            "five": 5,
+            "seven": 7,
+            "eight": 8,
+            "nine": 9,
+            "ten": 10,
+            "eleven": 11,
+            "twelve": 12,
+            "thirteen": 13,
+            "fourteen": 14,
+            "fifteen": 15,
+            "sixteen": 16,
+            "twenty": 20,
+            "thirty": 30,
+            "forty": 40,
+            "fifty": 50,
+            "sixty": 60
         ]
 
         let words = normalized
@@ -119,7 +143,7 @@ struct AddOperationIntent: AppIntent {
         
         guard let amountValue = parseAmount(amount) else {
             return .result(
-                dialog: "Je n'ai pas compris le montant \(amount)."
+                dialog: "I have not understood the amount \(amount)."
             )
         }
                 
@@ -142,7 +166,7 @@ struct AddOperationIntent: AppIntent {
             }
         ) else {
             return .result(
-                dialog: "Je n'ai pas compris la catégorie."
+                dialog: "I have not understood the category \(category)."
             )
         }
         
@@ -158,7 +182,7 @@ struct AddOperationIntent: AppIntent {
         try context.save()
                 
         return .result(
-            dialog: "OK, j'ai ajouté une dépense de \(amount), \(operationDescription), pour \(selectedCategory.name)."
+            dialog: "OK, I added an expense \(amount), \(operationDescription), for \(selectedCategory.name)."
         )
     }
 }
