@@ -80,17 +80,29 @@
 		E8E28F973052FF9900A476B8 /* Exceptions for "S058_BudgetTracker" folder in "S058_BudgetTracker" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				logger.swift,
 				"S058-BudgetTracker-Info.plist",
 			);
 			target = E8E28F363052EAC000A476B8 /* S058_BudgetTracker */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		E8530188306A6AA0005720B4 /* Exceptions for "S058_BudgetTracker" folder in "Copy Bundle Resources" phase from "S058_BudgetTracker" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = E8E28F353052EAC000A476B8 /* Resources */;
+			membershipExceptions = (
+				logger.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E8E28F393052EAC000A476B8 /* S058_BudgetTracker */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				E8E28F973052FF9900A476B8 /* Exceptions for "S058_BudgetTracker" folder in "S058_BudgetTracker" target */,
+				E8530188306A6AA0005720B4 /* Exceptions for "S058_BudgetTracker" folder in "Copy Bundle Resources" phase from "S058_BudgetTracker" target */,
 				E8E28F943052F83700A476B8 /* Exceptions for "S058_BudgetTracker" folder in "BudgetTrackerWidgetExtension" target */,
 			);
 			path = S058_BudgetTracker;
