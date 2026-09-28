@@ -16,6 +16,8 @@ struct BudgetTrackerShortcuts: AppShortcutsProvider {
             intent: AddOperationIntent(),
             phrases: [
                 "Ajouter une dépense dans \(.applicationName)",
+                "Dans \(.applicationName), ajoute une dépense.",
+                "Ajoute une dépense dans \(.applicationName)",
             ],
             shortTitle: "Ajouter une dépense dans Budget Tracker",
             systemImageName: "plus.circle"
