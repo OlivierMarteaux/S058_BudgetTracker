@@ -165,7 +165,7 @@ struct OperationEditorView: View {
                         text: $amount
                     )
                     .keyboardType(
-                        .decimalPad
+                        .numbersAndPunctuation
                     )
                 }
 
