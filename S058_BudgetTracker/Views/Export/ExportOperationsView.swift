@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import UniformTypeIdentifiers
+import FirebaseAnalytics
 
 struct ExportOperationsView: View {
 
@@ -184,6 +185,9 @@ struct ExportOperationsView: View {
                 print(
                     "CSV export successful."
                 )
+                Analytics.logEvent("csv_exported", parameters: [
+                            "count": operationsToExport.count
+                        ])
 
             case .failure(let error):
                 print(

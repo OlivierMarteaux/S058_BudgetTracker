@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 import SwiftData
+import FirebaseAnalytics
 
 @MainActor
 final class OperationsViewModel: ObservableObject {
@@ -26,6 +27,7 @@ final class OperationsViewModel: ObservableObject {
 
         modelContext.insert(operation)
         save()
+        Analytics.logEvent("operation_added", parameters: nil)
     }
 
     func updateOperation(
@@ -52,6 +54,9 @@ final class OperationsViewModel: ObservableObject {
         }
 
         save()
+        Analytics.logEvent("operation_deleted", parameters: [
+                "count": operations.count
+            ])
     }
     
     func deleteOperation(
@@ -60,6 +65,9 @@ final class OperationsViewModel: ObservableObject {
         modelContext.delete(operation)
 
         save()
+        Analytics.logEvent("operation_deleted", parameters: [
+                "count": 1
+            ])
     }
 
     private func save() {

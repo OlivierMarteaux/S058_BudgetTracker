@@ -9,6 +9,7 @@
 import Foundation
 import SwiftData
 import Combine
+import FirebaseAnalytics
 
 @MainActor
 final class CategoriesViewModel: ObservableObject {
@@ -44,6 +45,7 @@ final class CategoriesViewModel: ObservableObject {
 
         modelContext.insert(category)
         save()
+        Analytics.logEvent("category_created", parameters: nil)
     }
 
     func updateCategory(

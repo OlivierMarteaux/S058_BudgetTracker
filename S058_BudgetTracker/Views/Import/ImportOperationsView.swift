@@ -9,6 +9,7 @@
 import SwiftUI
 import SwiftData
 import UniformTypeIdentifiers
+import FirebaseAnalytics
 
 private func ensureCategoryExists(
     named name: String,
@@ -215,6 +216,9 @@ struct ImportOperationsView: View {
             }
 
             try modelContext.save()
+            Analytics.logEvent("csv_imported", parameters: [
+                        "count": imported.count
+                    ])
 
             dismiss()
 
