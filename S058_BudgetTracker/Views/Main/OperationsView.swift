@@ -5,6 +5,15 @@
 
 import SwiftUI
 import SwiftData
+import UIKit
+
+#if os(iOS)
+private var actionToolbarPlacement: ToolbarItemPlacement {
+    UIDevice.current.userInterfaceIdiom == .pad
+        ? .bottomBar
+        : .topBarTrailing
+}
+#endif
 
 struct OperationsView: View {
 
@@ -240,6 +249,19 @@ struct OperationsView: View {
                                     Image(systemName: "trash")
                                 }
                             }
+//                            .contextMenu {
+//                                Button {
+//                                    operationToEdit = operation
+//                                } label: {
+//                                    Label("Edit", systemImage: "pencil")
+//                                }
+//
+//                                Button(role: .destructive) {
+//                                    deleteOperation(operation)
+//                                } label: {
+//                                    Label("Delete", systemImage: "trash")
+//                                }
+//                            }
                         }
                     }
                     .environment(
@@ -259,7 +281,7 @@ struct OperationsView: View {
             .toolbar {
 
                 ToolbarItemGroup(
-                    placement: .topBarTrailing
+                    placement: actionToolbarPlacement //.topBarTrailing
                 ) {
 
                     if isSelecting {
