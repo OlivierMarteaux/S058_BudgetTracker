@@ -21,7 +21,8 @@ struct BudgetTrackerShortcuts: AppShortcutsProvider {
                 
                 // English
                 "In \(.applicationName), add an expense.",
-                "Add an expense to \(.applicationName)"
+                "Add an expense to \(.applicationName)",
+                "\(.applicationName)"
             ],
             shortTitle: "Add an expense to Budget Tracker",
             systemImageName: "plus.circle"
