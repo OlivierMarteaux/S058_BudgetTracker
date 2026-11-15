@@ -249,19 +249,19 @@ struct OperationsView: View {
                                     Image(systemName: "trash")
                                 }
                             }
-//                            .contextMenu {
-//                                Button {
-//                                    operationToEdit = operation
-//                                } label: {
-//                                    Label("Edit", systemImage: "pencil")
-//                                }
-//
-//                                Button(role: .destructive) {
-//                                    deleteOperation(operation)
-//                                } label: {
-//                                    Label("Delete", systemImage: "trash")
-//                                }
-//                            }
+                            .contextMenu {
+                                Button {
+                                    operationToEdit = operation
+                                } label: {
+                                    Label("Edit", systemImage: "pencil")
+                                }
+
+                                Button(role: .destructive) {
+                                    deleteOperation(operation)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
                         }
                     }
                     .environment(
@@ -309,88 +309,91 @@ struct OperationsView: View {
                             selectedOperationIDs.removeAll()
                         }
                     } else {
-
-                        Button {
-
-                            isSelecting = true
-
-                        } label: {
-
-                            Image(
-                                systemName: "checklist"
-                            )
-                        }
-                        .accessibilityLabel(
-                            "Select operations"
-                        )
-
-                        Button {
-
-                            showFilter = true
-
-                        } label: {
-
-                            Image(
-                                systemName:
-                                    isFilterActive
-                                    ? "line.3.horizontal.decrease.circle.fill"
-                                    : "line.3.horizontal.decrease.circle"
-                            )
-                        }
-                        .accessibilityLabel(
-                            "Filter operations"
-                        )
-
-                        Button {
-
-                            showImport = true
-
-                        } label: {
-
-                            Image(
-                                systemName:
-                                    "square.and.arrow.down"
-                            )
-                        }
-                        .accessibilityLabel(
-                            "Import operations"
-                        )
-
-                        Button {
-
-                            showExport = true
-
-                        } label: {
-
-                            Image(
-                                systemName:
-                                    "square.and.arrow.up"
-                            )
-                        }
-                        .accessibilityLabel(
-                            "Export operations"
-                        )
-
-//                        Button {
-//
-//                            showAddOperation = true
-//
-//                        } label: {
-//
-//                            Image(
-//                                systemName: "plus"
-//                            )
-//                        }
-//                        .accessibilityLabel(
-//                            "Add operation"
-//                        )
                         
-                        Button {
-                            showSettings = true
-                        } label: {
-                            Image(systemName: "gearshape")
+                        HStack(spacing: 24){
+                            Button {
+
+                                isSelecting = true
+
+                            } label: {
+
+                                Image(
+                                    systemName: "checklist"
+                                )
+                            }
+                            .accessibilityLabel(
+                                "Select operations"
+                            )
+
+                            Button {
+
+                                showFilter = true
+
+                            } label: {
+
+                                Image(
+                                    systemName:
+                                        isFilterActive
+                                        ? "line.3.horizontal.decrease.circle.fill"
+                                        : "line.3.horizontal.decrease.circle"
+                                )
+                            }
+                            .accessibilityLabel(
+                                "Filter operations"
+                            )
+
+                            Button {
+
+                                showImport = true
+
+                            } label: {
+
+                                Image(
+                                    systemName:
+                                        "square.and.arrow.down"
+                                )
+                            }
+                            .accessibilityLabel(
+                                "Import operations"
+                            )
+
+                            Button {
+
+                                showExport = true
+
+                            } label: {
+
+                                Image(
+                                    systemName:
+                                        "square.and.arrow.up"
+                                )
+                            }
+                            .accessibilityLabel(
+                                "Export operations"
+                            )
+
+    //                        Button {
+    //
+    //                            showAddOperation = true
+    //
+    //                        } label: {
+    //
+    //                            Image(
+    //                                systemName: "plus"
+    //                            )
+    //                        }
+    //                        .accessibilityLabel(
+    //                            "Add operation"
+    //                        )
+                            
+                            Button {
+                                showSettings = true
+                            } label: {
+                                Image(systemName: "gearshape")
+                            }
+                            .accessibilityLabel("Settings")
                         }
-                        .accessibilityLabel("Settings")
+                        .frame(maxWidth: .infinity)
                     }
                 }
             }

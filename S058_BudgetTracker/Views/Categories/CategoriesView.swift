@@ -144,6 +144,19 @@ struct CategoriesView: View {
                                         )
                                     }
                                 }
+                                .contextMenu {
+                                    Button {
+                                        categoryToEdit = category
+                                    } label: {
+                                        Label("Edit", systemImage: "pencil")
+                                    }
+
+                                    Button(role: .destructive) {
+                                        viewModel.deleteCategory(category)
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                }
                         }
                     }
                 }
